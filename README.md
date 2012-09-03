@@ -6,7 +6,7 @@
 
 Run the following commands:
 
-    git clone git@github.com:JonathanMoreau/Miam.git
+    git clone git@github.com:JonathanMoreau/YouFood.git
 
 2) Installation
 ---------------
@@ -42,14 +42,10 @@ Congratulations! You're now ready to use Symfony. If you've unzipped Symfony
 in the web root of your computer, then you should be able to access the
 web version of the Symfony requirements check via:
 
-    http://localhost/Miam/web/config.php
+    http://localhost/YouFood/web/config.php
 
 If everything looks good, click the "Bypass configuration and go to the Welcome page"
 link to load up your first Symfony page.
-
-To see a real-live Symfony page in action, access the following page:
-
-    web/app_dev.php/demo/hello/Fabien
 
 3) Configuration Virtual Hosts
 -----------------------
@@ -59,49 +55,28 @@ Ajouter aux Virtual Hosts Apache le code suivant :
     NameVirtualHost *:80
 
     <VirtualHost *:80>
-        ServerName dev.youfood.com
+        ServerName youfood.org
+        ServerAlias *.youfood.org
         ServerAdmin tonmail@gmail.com
-        DocumentRoot "path/Miam/web"
-        <Directory "path/Miam/web>
+        DocumentRoot "path/YouFood/web"
+        <Directory "path/Miam/web">
             Options Indexes FollowSymLinks MultiViews
-            AllowOverride None
+            AllowOverride all
             Order allow,deny
             allow from all
-            <IfModule mod_rewrite.c>
-                RewriteEngine On
-                RewriteCond %{REQUEST_FILENAME} !-f
-                RewriteRule ^(.*)$ /app_dev.php [QSA,L]
-            </IfModule>
-        </Directory>
-    </VirtualHost>
-
-    <VirtualHost *:80>
-        ServerName prod.youfood.com
-        ServerAdmin tonmail@gmail.com
-        DocumentRoot "path/Miam/YouFood/web"
-        <Directory "path/Miam/web>
-            Options Indexes FollowSymLinks MultiViews
-            AllowOverride None
-            Order allow,deny
-            allow from all
-            <IfModule mod_rewrite.c>
-                RewriteEngine On
-                RewriteCond %{REQUEST_FILENAME} !-f
-                RewriteRule ^(.*)$ /app.php [QSA,L]
-            </IfModule>
         </Directory>
     </VirtualHost>
 
 4) Ajouter les entrées dans le fichier hosts
 ------------------------
 
-    127.0.0.1  dev.youfood.com
-    127.0.0.1 prod.youfood.com
+    127.0.0.1  dev.youfood.org
+    127.0.0.1 prod.youfood.org
 
 5) GO
 -----------------------
 
-Tester si dev.youfood.com fonctionne sur votre navigateur, sinon envoyer un mail à jonathanmoreaufr@gmail.com
+Tester si dev.youfood.org fonctionne sur votre navigateur, sinon envoyer moi un mail.
 
 
 @Enjoy!

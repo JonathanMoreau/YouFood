@@ -1,5 +1,13 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    ## sub domain settings ##
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ app.php [QSA,L]
+    RewriteCond %{HTTP_HOST} ^www.*
+    RewriteRule ^(.*)$ /app.php [QSA,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{HTTP_HOST} ^dev.*
+    RewriteRule ^(.*)$ /app_dev.php [QSA,L]
+
 </IfModule>

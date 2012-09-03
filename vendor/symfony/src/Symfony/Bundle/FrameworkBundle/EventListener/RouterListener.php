@@ -78,7 +78,7 @@ class RouterListener
 
             $request->attributes->add($parameters);
         } catch (ResourceNotFoundException $e) {
-            $message = sprintf('La page à laquelle vous tenter d\'accéder n\'existe pas ou plus !');
+            $message = sprintf('No route found for "%s %s"', $request->getMethod(), $request->getPathInfo());
 
             throw new NotFoundHttpException($message, $e);
         } catch (MethodNotAllowedException $e) {
