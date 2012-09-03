@@ -1,0 +1,61 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Zone {{ entity.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Zone {{ entity.name }}
+        <small>{% if entity.user %}{{ entity.user.name }}{% endif %}</small>
+    </h1>
+</div>
+
+<table class="table table-condensed table-striped table table-bordered">
+    <tbody>
+        <tr>
+            <th class="span1">Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th class="span1">Name</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        {% if entity.user %}
+        <tr>
+            <th class="span1">Responsable</th>
+            <td>{{ entity.user.name }}</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% if entity.boards|length > 0 %}
+    <h2>Tables</h2>
+    <table class="table table-condensed table-striped table table-bordered">
+        <thead>
+            <tr>
+                <th class="span1">Id</th>
+                <th>Numéro</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for board in entity.boards %}
+                <tr>
+                    <td>{{ board.id }}</td>
+                    <td>{{ board.number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<div class="form-actions">
+    <form action="{{ path('zone_delete', { 'id': entity.id }) }}" method="post">
+        {{ form_widget(delete_form) }}
+        <a class="btn btn-large btn-primary" href="{{ path('zone_edit', { 'id': entity.id }) }}">Modifier</a>
+        <button class="btn btn-large btn-danger" type="submit">Supprimer</button>
+        <a class="btn btn-large" href="{{ path('zone') }}">Retour à la liste des zones</a>
+    </form>
+</div>
+
+{% endblock %}

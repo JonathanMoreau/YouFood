@@ -1,0 +1,30 @@
+zone:
+    pattern:  /
+    defaults: { _controller: "YouFoodAdminBundle:Zone:index" }
+
+zone_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "YouFoodAdminBundle:Zone:show" }
+
+zone_new:
+    pattern:  /new
+    defaults: { _controller: "YouFoodAdminBundle:Zone:new" }
+
+zone_create:
+    pattern:  /create
+    defaults: { _controller: "YouFoodAdminBundle:Zone:create" }
+    requirements: { _method: post }
+
+zone_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "YouFoodAdminBundle:Zone:edit" }
+
+zone_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "YouFoodAdminBundle:Zone:update" }
+    requirements: { _method: post }
+
+zone_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "YouFoodAdminBundle:Zone:delete" }
+    requirements: { _method: post }

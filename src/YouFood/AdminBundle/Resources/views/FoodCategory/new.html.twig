@@ -1,0 +1,21 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Nouvelle Catégorie de plat{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Nouvelle Catégorie de plat
+        <small>Créer une nouvelle catégorie plat pour votre carte.</small>
+    </h1>
+</div>
+
+<form action="{{ path('foodcategory_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p class="form-actions">
+        <button class="btn btn-large btn-primary" type="submit">Créer</button>
+        <a class="btn btn-large" href="{{ path('foodcategory') }}">Retour à la liste des plats</a>
+    </p>
+</form>
+
+{% endblock %}

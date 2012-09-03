@@ -1,0 +1,15 @@
+YouFoodCookBundle:
+    resource: "@YouFoodCookBundle/Resources/config/routing.yml"
+    prefix:   /cook
+
+YouFoodServiceBundle:
+    resource: "@YouFoodServiceBundle/Resources/config/routing.yml"
+    prefix:   /service
+
+YouFoodAdminBundle:
+    resource: "@YouFoodAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+YouFoodRoomBundle:
+    resource: "@YouFoodRoomBundle/Resources/config/routing.yml"
+    prefix:   /

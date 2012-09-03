@@ -1,0 +1,43 @@
+{% extends 'YouFoodRoomBundle::layout.html.twig' %}
+
+{% block title %}Bienvenue chez YouFood{% endblock %}
+
+{% block content %}
+
+{% if app.session.hasFlash('validate') %}
+	<div class="alert alert-success fade in">
+		<a class="close" data-dismiss="alert" href="#">×</a>
+		<h4 class="alert-heading">{{ app.session.flash('validate') }}</h4>
+		{{ app.session.flash('validate-msg') }}
+	</div>
+{% endif %}
+
+<div class="hero-unit" style="margin-top: 20px">
+	<h1>Bienvenue chez YouFood</h1>
+	<p>
+		Cette semaine la <strong>gastronomie française</strong> est à l'honneur dans votre restaurant !
+	</p>
+	<p>
+		<img src="{{ asset('/bundles/youfoodroom/images/french.gif') }}" alt="french food" style="height: 200px;"/>
+	</p>
+	<p>
+		<em>Vous allez vous régaler les papilles, parole de youfood.</em>
+	</p>
+</div>
+
+<div class="page-header">
+    <h1>
+        Avant de commander
+        <small>Veuillez nous indiquez le numéro figurant sur votre table.</small>
+    </h1>
+</div>
+
+<form action="{{ path('YouFoodRoomBundle_homepage') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form._token) }}
+    {{ form_widget(form.number) }}
+    <p class="form-actions">
+        <button class="btn btn-large btn-primary" type="submit">Je prends place !</button>
+    </p>
+</form>
+
+{% endblock %}

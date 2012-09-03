@@ -1,0 +1,6 @@
+<div class="page-header">
+    <h1>
+        {{ status_code }} Oups !
+        <small>{{ exception.message|e|replace({"\n": '<br />'})|format_file_from_text }}</small>
+    </h1>
+</div>

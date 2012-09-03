@@ -1,0 +1,30 @@
+food:
+    pattern:  /
+    defaults: { _controller: "YouFoodAdminBundle:Food:index" }
+
+food_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "YouFoodAdminBundle:Food:show" }
+
+food_new:
+    pattern:  /new
+    defaults: { _controller: "YouFoodAdminBundle:Food:new" }
+
+food_create:
+    pattern:  /create
+    defaults: { _controller: "YouFoodAdminBundle:Food:create" }
+    requirements: { _method: post }
+
+food_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "YouFoodAdminBundle:Food:edit" }
+
+food_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "YouFoodAdminBundle:Food:update" }
+    requirements: { _method: post }
+
+food_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "YouFoodAdminBundle:Food:delete" }
+    requirements: { _method: post }

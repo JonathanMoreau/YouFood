@@ -1,0 +1,171 @@
+{% extends 'YouFoodRoomBundle::layout.html.twig' %}
+
+{% block title %}Commande table n°{{number}}{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span10">
+            <div class="page-header">
+                <h1>
+                    Votre commande ! 
+                    <small>pour la table n°{{number}}</small>
+                </h1>
+            </div>
+        </div>
+
+        <div class="span2 pull-right">
+            <p class="pagination-centered">
+                <a class="btn btn-large btn-primary" href="{{ path('YouFoodRoomBundle_ready', { 'number': number } ) }}">Revenir aux choix des menus & plats</a>
+            </p>
+        </div>
+    </div>
+
+{% if app.session.hasFlash('removetocart') %}
+    <div class="alert alert-info fade in">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <h4 class="alert-heading">{{ app.session.flash('removetocart') }}</h4>
+        {{ app.session.flash('removetocart-msg') }}
+    </div>
+{% endif %}
+
+{% if app.session.hasFlash('addtocart') %}
+    <div class="alert alert-success fade in">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <h4 class="alert-heading">{{ app.session.flash('addtocart') }}</h4>
+        {{ app.session.flash('addtocart-msg') }}
+    </div>
+{% endif %}
+
+{% if menusOrdered %}
+<table class="table table-striped table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="3">Vos Menus</th>
+        </tr>
+        <tr>
+            <th class="span2">Quantité</th>
+            <th class="span3">Menu</th>
+            <th class="span6">Description</th>
+            <th class="span2">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for menuOrdered in menusOrdered %}
+        <tr>
+            <td>
+                <div class="btn-group">
+                    <button class="btn" onclick="location.href='{{ path('YouFoodRoomBundle_add_menu', { 'number': number, 'menu_id': menuOrdered.menu.id }) }}'">+</button>
+                    <button class="btn disabled">{{ menuOrdered.quantity }}</button>
+                    <button class="btn" onclick="location.href='{{ path('YouFoodRoomBundle_remove_menu', { 'number': number, 'menu_id': menuOrdered.menu.id }) }}'">-</button>
+                </div>
+            </td>
+            <td>{{ menuOrdered.menu.name }}</td>
+            <td>{{ menuOrdered.menu.description }}</td>
+            <td>{{ menuOrdered.menu.price *  menuOrdered.quantity}} EUR</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if menusOrdered %}
+<table class="table table-striped table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="4">Vos Plats</th>
+        </tr>
+        <tr>
+            <th class="span2">Quantité</th>
+            <th class="span3">Photo</th>
+            <th class="span6">Plat</th>
+            <th class="span2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for foodOrdered in foodsOrdered %}
+        <tr>
+            <td>
+                <div class="btn-group">
+                    <button class="btn" onclick="location.href='{{ path('YouFoodRoomBundle_add_food', { 'number': number, 'food_id': foodOrdered.food.id }) }}'">+</button>
+                    <button class="btn disabled">{{ foodOrdered.quantity }}</button>
+                    <button class="btn" onclick="location.href='{{ path('YouFoodRoomBundle_remove_food', { 'number': number, 'food_id': foodOrdered.food.id }) }}'">-</button>
+                </div>
+            </td>
+            <td><img src="{{ asset(foodOrdered.food.description) }}" alt="{{ foodOrdered.food.name }}" style="width: 150px;"/></td>
+            <td>{{ foodOrdered.food.name }}</td>
+            <td><a class="btn btn-large" href="{{ path('YouFoodRoomBundle_remove_food_totaly', { 'number': number, 'food_id': foodOrdered.food.id }) }}">Supprimer</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if amount != 0 %}
+<table class="table table-striped table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="2">Récapitulatif de commande</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="pull-right">TOTAL HT</span></td>
+            <td>{{ amount - (amount * 0.077) }} EUR</td>
+        </tr>
+        <tr>
+            <td><span class="pull-right">TVA 7,7%</span></td>
+            <td>{{ amount * 0.077 }} EUR</td>
+        </tr>
+        <tr>
+            <td><span class="pull-right"><b>TOTAL TTC à payer</b></span></td>
+            <td class="span2"><strong>{{ amount }} EUR</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="form-actions">
+    <div class="pull-right">
+            <h2>Détails de paiement</h2>
+        <div class="cards">
+            <span class="visa">Visa</span>
+            <span class="visa_electron">Visa Electron</span>
+            <span class="mastercard">MasterCard</span>
+        </div>
+
+        <label for="card_number">Numéro de carte</label>
+        <input type="text" name="card_number" id="card_number">
+
+        <label for="expiry_date">Date d'expiration (<small>mm/aa</small>)</label>
+        <input type="text" name="expiry_date" id="expiry_date" maxlength="5">
+        
+        <label for="cvv">Cryptogramme</label>
+        <input type="text" name="cvv" id="cvv" maxlength="3">
+
+
+        <div class="vertical maestro" style="display: none; opacity: 0; ">
+            <label for="issue_date">Issue date <small>mm/yy</small></label>
+            <input type="text" name="issue_date" id="issue_date" maxlength="5">
+
+            <span class="or">or</span>
+            <label for="issue_number">Issue number</label>
+            <input type="text" name="issue_number" id="issue_number" maxlength="2">
+        </div>
+
+       <div style="margin-top: 20px">
+            <a class="btn btn-large btn-success" href="{{ path('YouFoodRoomBundle_validate', { 'number': number } ) }}">Valider la commande</a>
+            <a class="btn btn-large btn-danger" href="{{ path('YouFoodRoomBundle_cancel', { 'number': number } ) }}">Annuler</a>
+        </div>
+    </div>
+</div>
+
+
+{% else %}
+<div class="hero-unit">
+    <h2>Vous n'avez encore rien commandé.</h2>
+    <p>Pourquoi ne pas commencez par regarder les menus ?</p>
+    <p><a class="btn btn-large btn-success" href="{{ path('YouFoodRoomBundle_ready', { 'number': number } ) }}">Voir les menus</a></p>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    you_food_cook.example.class: YouFood\CookBundle\Example
+
+services:
+#    you_food_cook.example:
+#        class: %you_food_cook.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

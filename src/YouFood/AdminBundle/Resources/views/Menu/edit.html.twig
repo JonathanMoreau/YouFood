@@ -1,0 +1,51 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Menu {{ entity.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Menu {{ entity.name }}
+        <small>{{ entity.description }}.</small>
+    </h1>
+</div>
+
+<form action="{{ path('menu_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <a href="#" id="add_food">Ajouter un Plat</a>
+    <p class="form-actions">
+        <button class="btn btn-large btn-primary" type="submit">Modifier</button>
+        <a class="btn btn-large" href="{{ path('menu') }}">Retour à la liste des menus</a>
+    </p>
+</form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+    var $container = $('#youfood_adminbundle_menutype_foods');
+    
+    // On définit une fonction qui va ajouter un champ.
+    function add_food() {
+        // On définit le numéro du champ (en comptant le nombre de champs déjà ajoutés).
+        index = $container.children().length;
+
+        // On ajoute à la fin de la balise <div> le contenu de l'attribut « data-prototype »,
+        // après avoir remplacé la variable $$name$$ qu'il contient par le numéro du champ.
+        $container.append(
+            $($container.attr('data-prototype').replace(/\$\$name\$\$/g, index))
+        );
+    }
+    
+    // On ajoute un premier champ directement s'il n'en existe pas déjà un.
+    if($container.children().length == 0) {
+        //add_food();
+    }
+    
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $('#add_food').click(function() {
+        add_food();
+    });
+});
+</script>
+
+{% endblock %}

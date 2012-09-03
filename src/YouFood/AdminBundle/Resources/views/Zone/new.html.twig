@@ -1,0 +1,21 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Nouvelle Zone{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Nouvelle Zone
+        <small>Ajouter une nouvelle zone.</small>
+    </h1>
+</div>
+
+<form action="{{ path('zone_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p class="form-actions">
+        <button class="btn btn-large btn-success" type="submit">Créer</button>
+        <a class="btn btn-large" href="{{ path('zone') }}">Retour à la liste des zones</a>
+    </p>
+</form>
+
+{% endblock %}

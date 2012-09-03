@@ -1,0 +1,43 @@
+YouFoodRoomBundle_homepage:
+    pattern:  /
+    defaults: { _controller: YouFoodRoomBundle:Default:index }
+
+YouFoodRoomBundle_ready:
+    pattern:  /room/{number}
+    defaults: { _controller: YouFoodRoomBundle:Default:ready }
+
+YouFoodRoomBundle_panier:
+    pattern:  /room/{number}/cart
+    defaults: { _controller: YouFoodRoomBundle:Default:panier }
+
+YouFoodRoomBundle_add_menu:
+    pattern:  /room/{number}/add/menu/{menu_id}
+    defaults: { _controller: "YouFoodRoomBundle:Default:addMenu" }
+
+YouFoodRoomBundle_remove_menu:
+    pattern:  /room/{number}/remove/menu/{menu_id}
+    defaults: { _controller: "YouFoodRoomBundle:Default:removeMenu" }
+
+YouFoodRoomBundle_add_food:
+    pattern:  /room/{number}/add/food/{food_id}
+    defaults: { _controller: "YouFoodRoomBundle:Default:addFood" }
+
+YouFoodRoomBundle_remove_food:
+    pattern:  /room/{number}/remove/food/{food_id}
+    defaults: { _controller: "YouFoodRoomBundle:Default:removeFood" }
+
+YouFoodRoomBundle_remove_food_totaly:
+    pattern:  /room/{number}/remove/food/{food_id}/all
+    defaults: { _controller: "YouFoodRoomBundle:Default:removeFoodTotaly" }
+
+YouFoodRoomBundle_validate:
+    pattern:  /room/{number}/validate
+    defaults: { _controller: "YouFoodRoomBundle:Default:validate" }
+
+YouFoodRoomBundle_cancel:
+    pattern:  /room/{number}/cancel
+    defaults: { _controller: "YouFoodRoomBundle:Default:cancel" }
+
+YouFoodRoomBundle_help:
+    pattern:  /room/{number}/help
+    defaults: { _controller: "YouFoodRoomBundle:Default:help" }

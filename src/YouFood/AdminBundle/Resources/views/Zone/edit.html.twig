@@ -1,0 +1,22 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Zone {{ entity.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Zone {{ entity.name }}
+        <small>{% if entity.user %}{{ entity.user.name }}{% endif %}</small>
+    </h1>
+</div>
+
+
+<form action="{{ path('zone_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p class="form-actions">
+        <button class="btn btn-large btn-primary" type="submit">Modifier</button>
+        <a class="btn btn-large" href="{{ path('zone') }}">Retour à la liste des zones</a>
+    </p>
+</form>
+
+{% endblock %}

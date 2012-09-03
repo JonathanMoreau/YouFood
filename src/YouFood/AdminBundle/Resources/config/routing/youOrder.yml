@@ -1,0 +1,47 @@
+YouOrder:
+    pattern:  /
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:index" }
+
+YouOrder_new:
+    pattern:  /new
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:new" }
+
+YouOrder_create:
+    pattern:  /create
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:create" }
+
+YouOrder_add_food:
+    pattern:  /add/food/{food_id}
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:addFood" }
+
+YouOrder_remove_food:
+    pattern:  /remove/food/{food_id}
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:removeFood" }
+
+YouOrder_remove_food_totaly:
+    pattern:  /remove/food/{food_id}/all
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:removeFoodTotaly" }
+
+YouOrder_add_menu:
+    pattern:  /add/menu/{menu_id}
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:addMenu" }
+
+YouOrder_remove_menu:
+    pattern:  /remove/menu/{menu_id}
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:removeMenu" }
+
+YouOrder_validate:
+    pattern:  /validate
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:validate" }
+
+YouOrder_cancel:
+    pattern:  /cancel
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:cancel" }
+
+YouOrder_help:
+    pattern:  /help
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:help" }
+
+YouOrder_stats:
+    pattern:  /stats
+    defaults: { _controller: "YouFoodAdminBundle:YouOrder:stats" }

@@ -1,0 +1,69 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Utilisateur {{ entity.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Utilisateur {{ entity.name }}
+        <small>{% if entity.status == 1 %}Serveur{% else %}Utilisateur{% endif %}</small>
+    </h1>
+</div>
+
+<table class="table table-condensed table-striped table table-bordered">
+    <tbody>
+        <tr>
+            <th class="span1">Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th class="span1">Name</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <th class="span1">Status</th>
+            <td>{{ entity.status }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% if entity.zones|length > 0 %}
+    <h2>Zones</h2>
+    <table class="table table-condensed table-striped table table-bordered">
+        <thead>
+            <tr>
+                <th class="span1">Id</th>
+                <th>Name</th>
+                <th>Tables</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for zone in entity.zones %}
+                <tr>
+                    <td>{{ zone.id }}</td>
+                    <td>{{ zone.name }}</td>
+                    <td>
+                        {% if entity.zones %}
+                            {% for board in zone.boards %}
+                            {{ board.number }},
+                            {% endfor %}
+                        {% else %}
+                            Aucune table
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<div class="form-actions">
+    <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post">
+        {{ form_widget(delete_form) }}
+        <a class="btn btn-large btn-primary" href="{{ path('user_edit', { 'id': entity.id }) }}">Modifier</a>
+        <button class="btn btn-large btn-danger" type="submit">Supprimer</button>
+        <a class="btn btn-large" href="{{ path('user') }}">Retour à la liste des utilisateurs</a>
+    </form>
+</div>
+
+{% endblock %}

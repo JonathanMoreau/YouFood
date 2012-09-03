@@ -1,0 +1,39 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Les Catégories de plats{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Liste des Catégories de plats
+        <small>les catégories disponibles sur votre carte.</small>
+    </h1>
+</div>
+
+<table class="table table-striped table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('foodcategory_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.name }}</td>
+            <td>
+                <a href="{{ path('foodcategory_show', { 'id': entity.id }) }}">voir</a> -
+                <a href="{{ path('foodcategory_edit', { 'id': entity.id }) }}">modifier</a> -
+                <a href="{{ path('foodcategory_delete', { 'id': entity.id }) }}">supprimer</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-large btn-primary" href="{{ path('foodcategory_new') }}">Ajouter une catégorie de plat</a>
+</p>
+{% endblock %}

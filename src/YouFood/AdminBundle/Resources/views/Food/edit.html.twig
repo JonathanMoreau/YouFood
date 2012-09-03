@@ -1,0 +1,22 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Plat {{ entity.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Plat {{ entity.name }}
+        <small>{{ entity.description }}.</small>
+    </h1>
+</div>
+
+
+<form action="{{ path('food_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p class="form-actions">
+        <button class="btn btn-large btn-primary" type="submit">Modifier</button>
+        <a class="btn btn-large" href="{{ path('food') }}">Retour à la liste des plats</a>
+    </p>
+</form>
+
+{% endblock %}

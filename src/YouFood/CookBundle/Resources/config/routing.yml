@@ -1,0 +1,13 @@
+YouFoodCookBundle_homepage:
+    pattern:  /
+    defaults: { _controller: YouFoodCookBundle:Default:index }
+
+YouFoodCookBundle_ready:
+    pattern:  /ready/{number}
+    defaults: { _controller: YouFoodCookBundle:Default:ready }
+
+YouFoodCookBundle_list:
+    pattern:  /list
+    defaults: { _controller: YouFoodCookBundle:Default:list }
+
+

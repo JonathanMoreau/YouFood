@@ -1,0 +1,7 @@
+YouFoodServiceBundle_homepage:
+    pattern:  /
+    defaults: { _controller: YouFoodServiceBundle:Default:index }
+
+YouFoodServiceBundle_list:
+    pattern:  /list
+    defaults: { _controller: YouFoodServiceBundle:Default:list }

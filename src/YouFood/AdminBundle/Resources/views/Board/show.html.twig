@@ -1,0 +1,43 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Table {{ entity.number }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Table {{ entity.number }}
+        <small>{% if entity.zone.user %}Responsable {{entity.zone.user.name}}.{% endif %}</small>
+    </h1>
+</div>
+
+<table class="table table-condensed table-striped table table-bordered">
+    <tbody>
+        <tr>
+            <th class="span1">Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th class="span1">Numéro</th>
+            <td>{{ entity.number }}</td>
+        </tr>
+        <tr>
+            <th class="span1">Zone</th>
+            <td>{{ entity.zone.name }}</td>
+        </tr>
+        <tr>
+            <th class="span1">Reponsable</th>
+            <td>{{ entity.zone.user.name }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="form-actions">
+    <form action="{{ path('board_delete', { 'id': entity.id }) }}" method="post">
+        {{ form_widget(delete_form) }}
+        <a class="btn btn-large btn-primary" href="{{ path('board_edit', { 'id': entity.id }) }}">Modifier</a>
+        <button class="btn btn-large btn-danger" type="submit">Supprimer</button>
+        <a class="btn btn-large" href="{{ path('board') }}">Retour à la liste des tables</a>
+    </form>
+</div>
+
+{% endblock %}

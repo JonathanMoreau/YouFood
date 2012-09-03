@@ -1,0 +1,134 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Nouvelle Commande{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <p class="pull-right"><a href="{{ path('YouOrder_help') }}" class="btn btn-large btn-primary">Besoin d'aide ?</a></p>
+    <h1>
+        Les Menus disponibles
+        <small>les menus disponibles dans votre restaurant youfood.</small>
+    </h1>
+</div>
+
+{% for menu in menus %}
+    <div class="well">
+        <h2>
+            {{ menu.name }}
+            <small>{{ menu.description }} à {{ menu.price }} EUR</small>
+        </h2>
+        <p><a class="btn btn-large" href="{{ path('YouOrder_add_menu', { 'menu_id': menu.id }) }}">Ajouter</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            {% for food in menu.foods %}
+                <tbody>
+                    <tr>
+                        <td>{{ food.category.name }}</td>
+                        <td>{{ food.name }}</td>
+                        <td>{{ food.description }}</td>
+                        <td><a class="btn btn-large" href="{{ path('YouOrder_add_food', { 'food_id': food.id }) }}">Ajouter</a></td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+     </div>
+ {% endfor %}
+
+<div class="page-header">
+    <h1>
+        Votre commande
+        <small>YouFood.</small>
+    </h1>
+</div>
+
+{% if menusOrdered %}
+<table class="table table-striped table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="3">Vos Menus</th>
+        </tr>
+        <tr>
+            <th>Quantité</th>
+            <th>Menu</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for menuOrdered in menusOrdered %}
+        <tr>
+            <td class="span2">
+                <a class="btn" href="{{ path('YouOrder_add_menu', { 'menu_id': menuOrdered.menu.id }) }}">+</a> {{ menuOrdered.quantity }} <a class="btn" href="{{ path('YouOrder_remove_menu', { 'menu_id': menuOrdered.menu.id }) }}">-</a>
+            </td>
+            <td class="span8">{{ menuOrdered.menu.name }}</td>
+            <td class="span2">{{ menuOrdered.menu.price *  menuOrdered.quantity}} EUR</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if menusOrdered %}
+<table class="table table-striped table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="4">Vos Plats</th>
+        </tr>
+        <tr>
+            <th>Quantité</th>
+            <th>Plat</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for foodOrdered in foodsOrdered %}
+        <tr>
+            <td class="span2">
+                <a class="btn" href="{{ path('YouOrder_add_food', { 'food_id': foodOrdered.food.id }) }}">+</a> {{ foodOrdered.quantity }} <a class="btn" href="{{ path('YouOrder_remove_food', { 'food_id': foodOrdered.food.id }) }}">-</a></td>
+            <td class="span4">{{ foodOrdered.food.name }}</td>
+            <td class="span4">{{ foodOrdered.food.description }}</td>
+            <td class="span2"><a class="btn btn-large" href="{{ path('YouOrder_remove_food_totaly', { 'food_id': foodOrdered.food.id }) }}">Supprimer</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+<table class="table table-striped table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="2">Récapitulatif de commande</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="pull-right">TOTAL HT</span></td>
+            <td>{{ amount - (amount * 0.077) }} EUR</td>
+        </tr>
+        <tr>
+            <td><span class="pull-right">TVA 7,7%</span></td>
+            <td>{{ amount * 0.077 }} EUR</td>
+        </tr>
+        <tr>
+            <td><span class="pull-right">TOTAL TTC à payer</span></td>
+            <td class="span2">{{ amount }} EUR</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="form-actions">
+    <span class="pull-right">
+        <a class="btn btn-large btn-success" href="{{ path('YouOrder_validate') }}">Valider la commande</a>
+        <a class="btn btn-large btn-danger" href="{{ path('YouOrder_cancel') }}">Annuler</a>
+    </span>
+</div>
+
+
+{% endblock %}

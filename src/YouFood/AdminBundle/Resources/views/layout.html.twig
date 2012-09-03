@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %} - YouFood Administration</title>
+    <meta name="description" content="Administration de YouFood">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- Le styles -->
+    <link href="{{ asset('bundles/youfoodadmin/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/youfoodadmin/css/bootstrap-responsive.css') }}" rel="stylesheet">
+
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">YouFood Administration</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="{% if app.request.attributes.get('_route') == 'YouFoodAdminBundle_homepage' %}active{% endif %}">
+                <a href="{{ path('YouFoodAdminBundle_homepage') }}">Accueil</a>
+              </li>
+              <li class="dropdown {% if app.request.attributes.get('_route') == 'menu' %}active{% endif %}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Menus <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ path('menu') }}">Tous les menus</a></li>
+                  <li><a href="{{ path('menu_new') }}">Ajouter</a></li>
+               </ul>
+              </li>
+              <li class="dropdown {% if app.request.attributes.get('_route') in ['food', 'foodcategory'] %}active{% endif %}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Plats <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ path('food') }}">Tous les plats</a></li>
+                  <li><a href="{{ path('food_new') }}">Ajouter</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{{ path('foodcategory') }}">Toutes les catégories de plat</a></li>
+                  <li><a href="{{ path('foodcategory_new') }}">Ajouter une catégorie</a></li>
+               </ul>
+              </li>
+              <li class="dropdown {% if app.request.attributes.get('_route') in ['YouOrder', 'YouOrder_new'] %}active{% endif %}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Commandes <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ path('YouOrder') }}">Toutes les commandes</a></li>
+                  <li><a href="{{ path('YouOrder_stats') }}">Statistiques</a></li>
+                  <!-- <li><a href="{{ path('YouOrder_new') }}">Commander</a></li> -->
+               </ul>
+              </li>
+              <li class="dropdown {% if app.request.attributes.get('_route') in ['user', 'user_new', 'user_show'] %}active{% endif %}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Utilisateurs <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ path('user') }}">Toutes les utilisateurs</a></li>
+                  <li><a href="{{ path('user_new') }}">Ajouter</a></li>
+               </ul>
+              </li>
+              <li class="dropdown {% if app.request.attributes.get('_route') in ['zone', 'zone_new', 'zone_show', 'zone_edit', 'board', 'board_new', 'board_show', 'board_edit'] %}active{% endif %}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Salles <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ path('zone') }}">Toutes les Zones</a></li>
+                  <li><a href="{{ path('zone_new') }}">Ajouter</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{{ path('board') }}">Toutes les Tables</a></li>
+                  <li><a href="{{ path('board_new') }}">Ajouter</a></li>
+               </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ asset('bundles/youfoodadmin/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('bundles/youfoodadmin/js/jquery.tablesorter.min.js') }}"></script>
+  </body>
+</html>

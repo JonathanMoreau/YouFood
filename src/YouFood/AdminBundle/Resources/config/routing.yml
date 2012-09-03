@@ -1,0 +1,31 @@
+YouFoodAdminBundle_Menu:
+    resource: "@YouFoodAdminBundle/Resources/config/routing/menu.yml"
+    prefix:   /menu
+
+YouFoodAdminBundle_FoodCategory:
+    resource: "@YouFoodAdminBundle/Resources/config/routing/foodcategory.yml"
+    prefix:   /food/category
+
+YouFoodAdminBundle_Food:
+    resource: "@YouFoodAdminBundle/Resources/config/routing/food.yml"
+    prefix:   /food
+
+YouFoodAdminBundle_YouOrder:
+    resource: "@YouFoodAdminBundle/Resources/config/routing/youOrder.yml"
+    prefix:   /order
+
+YouFoodAdminBundle_User:
+    resource: "@YouFoodAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+YouFoodAdminBundle_Zone:
+    resource: "@YouFoodAdminBundle/Resources/config/routing/zone.yml"
+    prefix:   /zone
+
+YouFoodAdminBundle_Board:
+    resource: "@YouFoodAdminBundle/Resources/config/routing/board.yml"
+    prefix:   /board
+
+YouFoodAdminBundle_homepage:
+    pattern:  /
+    defaults: { _controller: "YouFoodAdminBundle:Default:index" }

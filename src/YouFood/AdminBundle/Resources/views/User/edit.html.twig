@@ -1,0 +1,20 @@
+{% extends 'YouFoodAdminBundle::layout.html.twig' %}
+
+{% block title %}Utilisateur {{ entity.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        Utilisateur {{ entity.name }}
+        <small>{% if entity.status == 1 %}Serveur{% else %}Utilisateur{% endif %}</small>
+    </h1>
+</div>
+
+<form action="{{ path('user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p class="form-actions">
+        <button class="btn btn-large btn-primary" type="submit">Modifier</button>
+        <a class="btn btn-large" href="{{ path('user') }}">Retour à la liste des utilisateurs</a>
+    </p>
+</form>
+{% endblock %}
