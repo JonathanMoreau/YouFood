@@ -59,7 +59,7 @@ Ajouter aux Virtual Hosts Apache le code suivant :
         ServerAlias *.youfood.org
         ServerAdmin tonmail@gmail.com
         DocumentRoot "path/YouFood/web"
-        <Directory "path/Miam/web">
+        <Directory "path/YouFood/web">
             Options Indexes FollowSymLinks MultiViews
             AllowOverride all
             Order allow,deny
